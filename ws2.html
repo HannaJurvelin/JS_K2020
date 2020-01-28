@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,34 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Workshop 2</title>
 </head>
+
 <body>
 
     <h2>Exercise 1</h2>
     <p id="text1">Lorem Ipsum</p>
 
+    <h2>Exercise 2</h2>
+    <p id="text2">Lorem Ipsum</p>
+
     <script>
-    document.getElementById('text1').innerHTML = '<b><i>&quot;If I had nine hours to chop down a tree, I&rsquo;d spend the first six sharpening my ax.&quot;</b><br> &#8208;&#8208; Abraham Lincoln</i>'
-    
+        document.getElementById('text1').innerHTML = '<b><i>&quot;If I had nine hours to chop down a tree, I&rsquo;d spend the first six sharpening my ax.&quot;</b><br> &#8208;&#8208; Abraham Lincoln</i>'
+
+        function repeatingText() {
+            var text = "The moment we decide to fulfil something, we can do anything.<br>";
+            var time = 50;
+            var repeatedText = "";
+
+            while (time > 0) {
+                repeatedText += text;
+                time--;
+            }
+            return repeatedText;
+        }
+
+        document.getElementById('text2').innerHTML = repeatingText();
+
     </script>
-    
+
 </body>
+
 </html>
