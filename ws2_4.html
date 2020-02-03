@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Exercise 4</title>
+</head>
+
+<body>
+
+    <h2 id="header"></h2>
+    <p id="gif"></p>
+    <script>
+
+        var alert = window.confirm("Are you a student?")
+        if (alert == true) {
+            document.getElementById("header").innerHTML = "Welcome student!";
+            document.getElementById("gif").innerHTML = '<img src="https://i.kym-cdn.com/photos/images/newsfeed/000/538/716/7f5.gif">';
+        }
+        else {
+            document.getElementById("header").innerHTML = "Sorry, this page is for students only";
+            document.getElementById("gif").innerHTML = '<img src="https://media3.giphy.com/media/Ty9Sg8oHghPWg/giphy.gif?cid=790b761178d557c7425a0f24e9cd2a5a83d7f8e0ce87c447&rid=giphy.gif">';
+        }
+
+    </script>
+
+</body>
+
+</html>
