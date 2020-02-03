@@ -17,6 +17,12 @@
     <h2>Exercise 2</h2>
     <p id="text2">Lorem Ipsum</p>
 
+    <h2>Exercise 3</h2>
+    <p id="text3">Lorem Ipsum</p>
+
+    <h2>Exercise 5</h2>
+    <p id="text5">Lorem Ipsum</p>
+
     <script>
         document.getElementById('text1').innerHTML = '<b><i>&quot;If I had nine hours to chop down a tree, I&rsquo;d spend the first six sharpening my ax.&quot;</b><br> &#8208;&#8208; Abraham Lincoln</i>'
 
@@ -33,6 +39,31 @@
         }
 
         document.getElementById('text2').innerHTML = repeatingText();
+
+        var selain = navigator.appVersion;
+        if (selain.indexOf('Chrome') > 0) {
+            location.href = document.getElementById('text3').innerHTML = '<a href="https://www.google.com/">Go to Google</a>';
+        }
+        else if (selain.indexOf('Safari') > 0) {
+            location.href = document.getElementById('text3').innerHTML = '<a href="https://www.microsoft.com/">Go to Microsoft</a>';
+        }
+
+        var images = [
+            "Images/cat1.jpg", 
+            "Images/cat2.jpg", 
+            "Images/cat3.jpg", 
+            "Images/cat4.jpg", 
+            "Images/cat5.jpg", 
+            "Images/dog.jpg", 
+            "Images/monkey.jpg"
+            ];
+
+        function randomImg() {
+            var number = Math.round( Math.random() * (images.length - 1) );
+            return images[number];
+        }
+
+        document.getElementById('text5').innerHTML = '<img src="'+randomImg()+'">';
 
     </script>
 
