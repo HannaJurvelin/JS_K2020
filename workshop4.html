@@ -61,6 +61,22 @@ function changeFont() {
   }
 }
 
+document.getElementById("mySelect").onchange = function() {alert()};
+
+function alertVal(val) {
+  alert("Your choice is " + val);
+  document.getElementById("carimage").setAttribute('src','./Images/' + val +'.jpg');
+}
+
+function borderOn() {
+  document.getElementById("carimage").style.border = "thick solid lightcoral";
+  }
+
+  function borderOff() {
+  document.getElementById("carimage").style.border = "none";
+  }
+
+
 </script>
 
 <h1 id="header">Workshop 4: DOM Scripting</h1>
@@ -96,19 +112,16 @@ function changeFont() {
 </p>
 
   <h2>Exercise 3: Images and pulldowns</h2>
-<li>Write a JavaScript function, which will fire when the pulldown menu item is changed. Show the users choice using alert -box.</li>
-<li>When the mouse is moved on top of the image, a colored border should appear surrounding it. On mouse out, border should disappear</li>
-<li>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.
   <p>Select a new car from the list.</p>
-  <select name="mySelect" id="mySelect" onchange="">
-    <option value="BMW">BMW         
-    <option value="Audi">Audi
-    <option value="Mercedes">Mercedes
-    <option value="Volvo">Volvo
+  <select name="mySelect" id="mySelect" onchange="alertVal(this.value)">
+    <option value="bmw">BMW    
+    <option value="audi">Audi
+    <option value="mercedes">Mercedes
+    <option value="volvo">Volvo
   </select>
   <br>
   <br>
-<img onmouseover="" onmouseout="" style="left: 0px; opacity: 1;" src="http://cdn.bmwblog.com/wp-content/uploads/2015/11/BMW-2-Series-Gran-Coupe-Rendering.jpg" width="400" id="carimage"/></li>
+<img onmouseover="borderOn()" onmouseout="borderOff()" style="left: 0px; opacity: 1;" src="Images/bmw.jpg" width="400" id="carimage"/></li>
 <h2>Exercise 4: Moving things around</h2>
 <ul>
   <li>
