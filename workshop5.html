@@ -1,0 +1,194 @@
+<HTML>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Workshop 5: Smart Forms</title>
+  </head>
+
+<script>
+
+function getData() {
+    var x = document.forms["emailForm"]["email"].value;
+    var y = document.forms["emailForm"]["comment"].value;
+    if (x == "" && y == "") {
+        document.forms.emailForm.email.style.borderColor = "red";
+        document.forms.emailForm.comment.style.borderColor = "red";
+        document.getElementById('feedback').innerHTML = "<b>*Fill in properly</b>";
+        document.getElementById('commentArea').innerHTML = "<b>*Fill in properly</b>";
+        alert("All fields must be filled out");
+        return false;
+    }
+    else if (x == "") {
+        document.forms.emailForm.email.style.borderColor = "red";
+        document.getElementById('feedback').innerHTML = "<b>*Fill in properly</b>";
+        alert("Email must be filled out");
+        return false;
+    }
+    else if (y == "") {
+        document.forms.emailForm.comment.style.borderColor = "red";
+        document.getElementById('commentArea').innerHTML = "<b>*Fill in properly</b>";
+        alert("Comment must be filled out");
+        return false;
+    }
+    else if (x.length < 6 || x.length > 16 || !x.includes("@")){
+        alert("Email must be filled out properly");
+        return false;
+    }
+}
+
+  function validateForm() {
+    event.preventDefault();
+    var x = document.forms["theForm"]["years"].value;
+    var y = document.getElementById("years").value * document.getElementById("type").value;
+    var z = 0.8;
+    var count = y * z;
+    document.getElementById("cost").value = y;
+      if (x >= 2) {
+        document.getElementById("cost").value = count;
+        document.getElementById("discount").innerHTML = "You got a 20% discount!";
+      }
+      else if (x >= 5) {
+        document.getElementById("yearsTxt").innerHTML = "Gongratulations! 5€ coupon for you!";
+      }
+    }
+
+      function showValue(){
+        hideAll()
+        document.getElementById(document.getElementById('selectId').value).style.display = ''
+      }
+</script>
+
+<h1>Workshop 5: Smart Forms</h1>
+
+<h2>Exercise 1: Contact Form</h2>
+
+<form name="emailForm" onsubmit="return getData()">
+	Email address:<br>
+  <input type="text" name="email" id="emailInput"><span id="feedback"></span>
+  <br>
+	Comment:<br>
+  <textarea name="comment"></textarea><span id="commentArea"></span>
+  <br>
+  <br>
+<input type="submit" value="Send" class="btn">
+</form>
+
+<form name="appearForm" onsubmit="return appearData()">
+  <label for="contact">Preferred way of contact:</label>
+
+  <select name="contact" id="selectId" onchange="showValue()">
+    <option value="">Select</option>
+    <option value="email">Email</option>
+    <option value="telephone">Telephone</option>
+    <option value="txtmsg">Text Message</option>
+    <option value="letter">Letter</option>
+  </select>
+  <br>
+  <br>
+  <div class="container">
+    <div class="inner" id="email">
+      <label for="contactEmail">Your Email:</label>
+      <input type="email" name="contactEmail" id="eCon">
+    </div>
+    <div class="inner" id="telephone">
+      <label for="contactTel">Your Telephone number:</label>
+      <input type="number" name="contactTel" id="telCon">
+    </div>
+    <div class="inner" id="txtmsg">
+      <label for="contactMsg">Your Telephone number:</label>
+      <input type="number" name="contactMsg" id="msgCon">
+    </div>
+    <div class="inner" id="letter">
+      <label for="contactLetter">Your Address:</label>
+      <input type="text" name="contactLetter" id="ltrCon">
+    </div>
+  </div>
+  <br>
+<input type="submit" value="Send" class="btn">
+</form>
+
+<h2>Exercise 2: Membership Calculator</h2>
+<form action="" method="post" id="theForm" name="theForm">
+        <fieldset><legend>Create Your Membership</legend>
+            <p>Complete this form to calculate your membership. There's a 20% discount if 
+you enroll for more than one year!</p>
+			<div><label for="type">Type</label> <select name="type" id="type" 
+required>
+			    <option value=10>Basic - $10.00</option>
+			    <option value=15>Premium - $15.00</option>
+			    <option value=20>Gold - $20.00</option>
+			    <option value=25>Platinum - $25.00</option>
+			</select></div>
+			<div><label for="years">Years</label><input type="number" 
+name="years" id="years" min="1" required></div>
+			<div><label for="cost">Cost</label><input type="text" name="cost" 
+id="cost" disabled></div>
+      <input type="submit" value="Calculate" id="submit" onclick="validateForm()">
+      <br>
+      <span id="discount"></span>
+      <span id="yearsTxt"></span>
+  </fieldset>
+</form>
+    
+<p data-line="20">&nbsp;</p>
+  <h2>Exercise 3: Book Order</h2>
+  <p data-line="27">In many cases, developer has to maintain and develop code written 
+by someone else. Look at the HTML code and JavaScript code below. Study how does 
+it work and what is the logic behind it.</p>
+  <p data-line="29">Then add following features to the code:</p>
+  <p data-line="31">a) the values read from the text   boxes are stored as strings. Modify 
+the code to store the quantity as an integer and the price, tax and discount as floats.
+</p>
+  <p data-line="33">b) modify the JS code to double the discount applied when the 
+quantity ordered is greater than 100 items</p>
+  <p data-line="35">c) modify the HTML form to include a shipping field, and include this 
+value in the total calculation in shopping.js. Shipping costs are 10€. However shipping is 
+free if the total sum is more than 100€. </p>
+  <p>&nbsp;</p>
+ 
+        <fieldset>
+            <p>Calculate a bulk book order.</p>
+			<div><label for="quantity">Quantity</label><input type="number" 
+name="quantity" id="quantity" value="1" min="1" required></div>
+			<div><label for="price">Price Per Unit</label><input type="text" 
+name="price" id="price" value="1.00" required></div>
+			<div><label for="tax">VAT (%)</label><input type="text" name="tax" 
+id="tax" value="0.0" required></div>
+			<div><label for="discount">Discount</label><input type="text" 
+name="discount" id="discount2" value="0.00" required></div>
+<div><label for="shipping">Shipping</label><input type="text" name="shipping" 
+  id="shipping" value="10" disabled></div>
+			<div><label for="total">Total</label><input type="text" name="total" 
+id="total" value="0.00"></div>
+			<div><input type="submit" value="Calculate" id="submit" 
+onClick="calculate()"></div>
+     </fieldset>
+
+
+<h2>Exercise 4: Hidden Extra fields</h2>
+<ul>
+<li>In PowerPoint-slides you were   shown a demo of a form where some extra fields 
+were hidden and they   turned visible after certain events occurred.
+    <p data-line="41">Copy the the contact form   created in Exercise 1 and edit it. Add 
+select boxes to the form where user   can choose a preferred way of contact. There 
+should be atleast email and   phone and sms available. </p>
+    <p data-line="41">After choosing the box, the user is shown an   input field which 
+asks detailed information regarding on the selected   contact method.</p>
+  </li>
+</ul>
+<script>
+  function hideAll(){
+    x = document.getElementsByClassName('inner')
+    for (i = 0; i < x.length; i++) {
+          x[i].style.display = 'none'
+    }
+  }
+  hideAll()
+</script>
+
+<script src="shopping.js"></script>
+
+</html>
+
+
