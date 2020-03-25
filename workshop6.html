@@ -1,0 +1,162 @@
+<HTML>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>Workshop 6: Using Localstorage</title>
+</head>
+
+<script>
+  function getData() {
+    var x = document.getElementById("destination").value;
+    var y = document.getElementById("arrival").value;
+
+    var checkedValue = [];
+    var inputElements = document.getElementsByClassName("CheckboxGroup1");
+    for (var i = 0; i < inputElements.length; ++i) {
+      if (inputElements[i].checked) {
+        checkedValue.push(inputElements[i].value);
+      }
+    }
+    let reservation = {
+      destination: x,
+      arrival: y,
+      services: checkedValue
+    }
+    localStorage.setItem("reservation", JSON.stringify(reservation));
+    var dest = JSON.parse(localStorage.getItem("reservation"));
+    console.log(dest)
+
+    addData(dest);
+  }
+
+  function addData(dest) {
+    //var dest = JSON.parse(localStorage.getItem("reservation"));
+    if (!dest){
+      dest = JSON.parse(localStorage.getItem("reservation"));
+    }
+    console.log(dest)
+    var inner = document.getElementById("sessiondata")
+    inner.innerHTML = '<h1>Destination: '+dest.destination+'</h1>';
+    inner.innerHTML += '<h2>Arrival Date: '+dest.arrival+'</h2>';
+    inner.innerHTML += '<p>Services:'+dest.services+'</p>';
+  }
+
+  window.addEventListener('load', function() {
+    addData()
+  })
+
+  function getSesData() {
+    var x = document.getElementById("destination2").value;
+    var y = document.getElementById("arrival2").value;
+
+    var checkedValue = [];
+    var inputElements = document.getElementsByClassName("CheckboxGroup2");
+    for (var i = 0; i < inputElements.length; ++i) {
+      if (inputElements[i].checked) {
+        checkedValue.push(inputElements[i].value);
+      }
+    }
+    let reservation = {
+      destination: x,
+      arrival: y,
+      services: checkedValue
+    }
+    sessionStorage.setItem("reservation", JSON.stringify(reservation));
+    var dest = JSON.parse(sessionStorage.getItem("reservation"));
+    console.log(dest)
+
+    addData(dest);
+  }
+
+</script>
+<!-- exercise #2 -->
+
+<body onload="">
+
+  <h1>Workshop 6: Using Localstorage</h1>
+  <hr />
+  <h2>Exercise 1: Saving the entered data</h2>
+
+  <form name="resForm" id="resForm">
+    <label for="textfield">Destination:</label>
+    <input type="text" name="textfield" id="destination">
+    <br>
+    <label for="textfield">Arrival Date:</label>
+    <input type="text" name="textfield" id="arrival">
+    <br>
+    <div id="services">
+      Services:
+      <label>
+        <br>
+        <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup1" value="Internet" id="CheckboxGroup1_0">
+        Internet</label>
+      <br>
+      <label>
+        <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup1" value="AC" id="CheckboxGroup1_1">
+        Air Conditioning</label>
+      <br>
+      <label>
+        <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup1" value="minibar" id="CheckboxGroup1_2">
+        Minibar</label>
+      <br>
+      <label>
+        <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup1" value="car" id="CheckboxGroup1_3">
+        Car rent</label>
+      <br>
+      <label>
+        <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup1" value="sauna" id="CheckboxGroup1_4">
+        Sauna
+      </label>
+      </p>
+    </div>
+    <p>
+      <input type="button" class="btn" name="button" id="button" value="Reserve" onclick="getData()">
+  </form>
+
+  <p>&nbsp;</p>
+  <h2>Exercise 2: Reloading the saved data</h2>
+
+  <div id="sessiondata">Session data goes here!</div>
+  <h2>Exercise 3: Sessionstorage vs. localstorage</h2>
+
+    <form name="sesForm" id="sesForm">
+      <label for="textfield">Destination:</label>
+      <input type="text" name="textfield" id="destination2">
+      <br>
+      <label for="textfield">Arrival Date:</label>
+      <input type="text" name="textfield" id="arrival2">
+      <br>
+      <div id="services2">
+        Services:
+        <label>
+          <br>
+          <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup2" value="Internet" id="CheckboxGroup1_0">
+          Internet</label>
+        <br>
+        <label>
+          <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup2" value="AC" id="CheckboxGroup1_1">
+          Air Conditioning</label>
+        <br>
+        <label>
+          <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup2" value="minibar" id="CheckboxGroup1_2">
+          Minibar</label>
+        <br>
+        <label>
+          <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup2" value="car" id="CheckboxGroup1_3">
+          Car rent</label>
+        <br>
+        <label>
+          <input type="checkbox" name="CheckboxGroup1" class="CheckboxGroup2" value="sauna" id="CheckboxGroup1_4">
+          Sauna
+        </label>
+  
+        </p>
+      </div>
+      <p>
+        <input type="button" class="btn" name="button" id="button" value="Reserve" onclick="getSesData()">
+    </form>
+</body>
+
+</html>
