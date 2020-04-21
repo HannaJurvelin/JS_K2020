@@ -14,7 +14,7 @@ body {
     border: none;
     border-radius: 8px;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -31,7 +31,11 @@ body {
     border: 1px solid black;
 }
 
-table, tr, td{
-    border: 1px solid gray;
+table, tr, td {
+    border-collapse: collapse;
+    border: 1px solid #2b525e;
     width: 50%;
+    background-color: #edffff;
+    color: #2b525e;
+    padding: 5px;
   }

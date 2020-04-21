@@ -1,0 +1,151 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<title>Workshop 6: Using Localstorage</title>
+</head>
+
+<script>
+
+	function parseData() {
+		var quote = document.getElementsByTagName("quote");
+		var author = document.getElementsByTagName("author");
+
+		for (i = 0; i < quote.length; i++) {
+			document.getElementById("textPlace").innerHTML += quote[i].innerHTML;
+			document.getElementById("textPlace").innerHTML += author[i].innerHTML + '<br>' + '<br>';
+		}
+	}
+
+	function loadQuote() {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("GET", "http://quotes.rest/qod.xml", true);
+		xmlhttp.send();
+		xmlhttp.onreadystatechange = function () {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				document.getElementById("quotes").innerHTML = xmlhttp.responseText;
+			}
+		}
+	}
+
+	function addData() {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("GET", "http://quotes.rest/qod.xml", true);
+		xmlhttp.send();
+		xmlhttp.onreadystatechange = function () {
+
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				var quote = xmlhttp.responseXML.getElementsByTagName("quote");
+				var author = xmlhttp.responseXML.getElementsByTagName("author");
+
+				document.getElementById("tabledata").getElementsByTagName("tbody")[0].innerHTML +=
+					'<tr>' +
+					'<td>' +
+					quote[0].innerHTML +
+					'</td>' +
+					'<td>' +
+					author[0].innerHTML +
+					'</td>' +
+					'</tr>'
+			}
+		}
+	}
+
+	function getNews() {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("GET", "https://www.is.fi/rss/tuoreimmat.xml", true);
+		xmlhttp.send();
+		xmlhttp.onreadystatechange = function () {
+
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				var items = xmlhttp.responseXML.getElementsByTagName("item");
+
+				for (i = 0; i < items.length; i++) {
+					document.getElementById("newsfeed").innerHTML += items[i].getElementsByTagName("title")[0].innerHTML.replace('<![CDATA[', '').replace(']]>', '') + '<br>' + '<br>';
+				}
+			} 
+		}
+	}
+
+</script>
+
+<body>
+
+	<div>
+		<h1>Workshop 7: Using AJAX and parsing XML</h1>
+	</div>
+
+	<div>
+		<hr />
+	</div>
+
+	<div>
+		<h2>Exercise 1: Parsing XML data</h2>
+	</div>
+
+	<div><input id="Fetch" class="btn" name="Fetch" type="button" value="Button" onclick="parseData()" /></div>
+	<br>
+	<div id="textPlace"></div>
+	<br>
+
+	<div>
+		<quotes>
+			<quote>I'm not concerned about all hell breaking loose, but that a PART of hell will break loose... it'll be
+				much harder to detect.</quote>
+			<length>124</length>
+			<author>George Carlin</author>
+		</quotes>
+		<quotes>
+			<quote>The biggest problem with every art is by the use of appearance to create a loftier reality. </quote>
+			<author>Johann Wolfgang von Goethe</author>
+		</quotes>
+		</pre>
+	</div>
+
+	<div>
+		<h2>Exercise 2: AJAX call to an XML file</h2>
+	</div>
+
+	<div>&nbsp;</div>
+	<div>
+		<p><input id="Fetch2" class="btn" name="Fetch2" type="button" value="Button" onclick="loadQuote()" /></p>
+	</div>
+	<div>
+		<div id="quotes">&nbsp;</div>
+	</div>
+<br>
+	<div>
+		<h2>Exercise 3: Parsing the XML</h2>
+	</div>
+	<div>
+		<p><input id="Fetch3" class="btn" name="Fetch3" type="button" value="Button" onclick="addData()" /></p>
+	</div>
+	<div>
+		<div id="tabledata">
+			<table>
+				<tbody>
+					<tr>
+						<td><strong>Quote</strong></td>
+						<td><strong>Author</strong></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div>
+	</div>
+
+	<div>
+		<h2>Exercise 4: AJAX call to a live newsfeed</h2>
+<br>
+	<div><input id="Fetch3" class="btn" name="Fetch3" type="button" value="Load Iltasanomat Newsfeed"
+			onclick="getNews()" /></div>
+			<br>
+	<div>
+		<div id="newsfeed">&nbsp;</div>
+	</div>
+</body>
+
+</html>
