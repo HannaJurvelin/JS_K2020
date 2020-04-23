@@ -45,7 +45,7 @@
     xmlhttp.open("GET", "https://randomuser.me/api/", true)
     xmlhttp.send();
 
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = function () {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         document.getElementById("rawdata").innerHTML = xmlhttp.responseText;
       }
@@ -57,53 +57,95 @@
     xmlhttp.open("GET", "https://randomuser.me/api/", true)
     xmlhttp.send();
 
-    xmlhttp.onreadystatechange = function() {
-      console.log( xmlhttp );
+    xmlhttp.onreadystatechange = function () {
+      console.log(xmlhttp);
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         jsonObj = JSON.parse(xmlhttp.responseText);
 
         console.log(jsonObj.results[0]);
 
-        document.getElementById("parsedata").innerHTML += 
-        "<table>" 
-        + "<tr>"
-        + "<th>" + "<p>Gender</p>" + "</th>"
-        + "<th>" + "<p>First name</p>" + "</th>"
-        + "<th>" + "<p>Last name</p>" + "</th>"
-        + "<th>" + "<p>City</p>" + "</th>"
-        + "<th>" + "<p>Age</p>" + "</th>"
-        + "<th>" + "<p>Photo</p>" + "</th>"
-        + "</tr>"
-        + "<tr>"
-        + "<td>" + jsonObj.results[0].gender + "</td>"
-        + "<td>" + jsonObj.results[0].name.first + "</td>"
-        + "<td>" + jsonObj.results[0].name.last + "</td>"
-        + "<td>" + jsonObj.results[0].location.city + "</td>"
-        + "<td>" + jsonObj.results[0].dob.age + "</td>"
-        + "<td>" + "<img src='" + jsonObj.results[0].picture.thumbnail + "'>" + "</td>"
-        + "</tr>"
-        + "</table>";
+        document.getElementById("parsedata").innerHTML +=
+          "<table>"
+          + "<tr>"
+          + "<th>" + "<p>Gender</p>" + "</th>"
+          + "<th>" + "<p>First name</p>" + "</th>"
+          + "<th>" + "<p>Last name</p>" + "</th>"
+          + "<th>" + "<p>City</p>" + "</th>"
+          + "<th>" + "<p>Age</p>" + "</th>"
+          + "<th>" + "<p>Photo</p>" + "</th>"
+          + "</tr>"
+          + "<tr>"
+          + "<td>" + jsonObj.results[0].gender + "</td>"
+          + "<td>" + jsonObj.results[0].name.first + "</td>"
+          + "<td>" + jsonObj.results[0].name.last + "</td>"
+          + "<td>" + jsonObj.results[0].location.city + "</td>"
+          + "<td>" + jsonObj.results[0].dob.age + "</td>"
+          + "<td>" + "<img src='" + jsonObj.results[0].picture.thumbnail + "'>" + "</td>"
+          + "</tr>"
+          + "</table>";
       }
     }
   }
 
   function showWeather() {
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2";
-    xmlhttp.open("GET", url , true)
+    var url = "http://api.openweathermap.org/data/2.5/weather?q=" + document.getElementById("city").value + "&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2";
+    xmlhttp.open("GET", url, true)
     xmlhttp.send();
 
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = function () {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         jsonObj = JSON.parse(xmlhttp.responseText);
 
         console.log(jsonObj);
 
-        document.getElementById("weatherdata").innerHTML += jsonObj.name;
+        document.getElementById("weatherdata").innerHTML +=
+          "<h2>" + jsonObj.name + "</h2>"
+          + "<p><strong>Temperature</strong></p>"
+          + "<p>" + jsonObj.main.temp + "&#176;C</p>"
+          + "<p><strong>Temperature feels like</strong></p>"
+          + "<p>" + jsonObj.main.feels_like + "&#176;C</p>"
+          + "<p><strong>Weather today</strong></p>"
+          + "<p>" + jsonObj.weather[0].main + "</p>"
+          + "<p>" + jsonObj.weather[0].description + "</p>"
+          + "<p><strong>Wind speed</strong></p>"
+          + "<p>" + jsonObj.wind.speed + "m&#47;s</p>"
+          + "<p><strong>Humidity</strong></p>"
+          + "<p>" + jsonObj.main.humidity + "	&#37;</p>"
 
+      }
+    }
   }
-}
-}
+
+  function searchWeather() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://api.openweathermap.org/data/2.5/weather?q=" + document.getElementById("citysearch").value + "&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2";
+    xmlhttp.open("GET", url, true)
+    xmlhttp.send();
+
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        jsonObj = JSON.parse(xmlhttp.responseText);
+
+        console.log(jsonObj);
+
+        document.getElementById("weatherdata").innerHTML +=
+          "<h2>" + jsonObj.name + "</h2>"
+          + "<p><strong>Temperature</strong></p>"
+          + "<p>" + jsonObj.main.temp + "&#176;C</p>"
+          + "<p><strong>Temperature feels like</strong></p>"
+          + "<p>" + jsonObj.main.feels_like + "&#176;C</p>"
+          + "<p><strong>Weather today</strong></p>"
+          + "<p>" + jsonObj.weather[0].main + "</p>"
+          + "<p>" + jsonObj.weather[0].description + "</p>"
+          + "<p><strong>Wind speed</strong></p>"
+          + "<p>" + jsonObj.wind.speed + "m&#47;s</p>"
+          + "<p><strong>Humidity</strong></p>"
+          + "<p>" + jsonObj.main.humidity + "	&#37;</p>"
+
+      }
+    }
+  }
 
 
 
@@ -115,8 +157,8 @@
 
 <h2>Exercise 1: JSON Basics</h2>
 <br>
-  <button class="btn" onclick="firstButton()">Display the first and lastname only</button>
-  <button class="btn" onclick="scndButton()">Display all data</button>
+<button class="btn" onclick="firstButton()">Display the first and lastname only</button>
+<button class="btn" onclick="scndButton()">Display all data</button>
 <br>
 <br>
 <div id="jsondata"></div>
@@ -132,37 +174,26 @@
 <div id="parsedata"></div>
 <br>
 
-<h2>Exercise 3: Real Life Challenge: OpenWeatherMap API - Return by next session for extra points!</h2>
+<h2>Exercise 3: Real Life Challenge: OpenWeatherMap API</h2>
 
-<p>OpenWeatherMap is a well known weather data provider online. It offers an API which allow developers to fetch data
-  about weather. The <a href="https://openweathermap.org/api">documentation can be found here</a>.
-  Your task is to write a Weather APP, which will display the weather information based on the users wishes. <b>Notice,
-    that you will need to sign up (its free) to get the API key, which allows you to use the service.</b></p>
-
-<p>Sample call to the REST API could be like this: <a
-    href="http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2">http://api.openweathermap.org/data/2.5/weather?q=Helsinki&units=metric&mode=JSON&APPID=ff64c247a136f706923d1ee0d55d71e2">
-  </a>. Click to see the response.</p>
-
-<li>First develop the app to display raw weather information (Temperature, Clouds, Humidity, Icon) on one spesific city,
-  when the button is clicked.
   <br>
-  <button class="btn" onclick="showWeather()">Get data</button> 
-</li>
-<li>When you achieve this, then parse the data and output it to div</li>
-<li>When you have achieved this, implement an onchange-event on the pulldown menu, which will allow the user to select
-  which city's data will be shown from a list of cities</li>
-<li>When you have completed this, add functionality to an input field, in which the user can write search queries which
-  are sent to the OpenWeatherMap API and the system will run a search query which is retuned to your app.</li>
-<p>Select a city from the list:
+  <button class="btn" onclick="showWeather()">Get data</button>
+
   <select name="mySelect" id="city" onchange="">
     <option value="Helsinki">Helsinki</option>
     <option value="Stockholm">Stockholm</option>
     <option value="Rome">Rome</option>
     <option value="New York">New York</option>
   </select>
-  <br />
-  Or type in a search query: <input id="citysearch"></input><button id="search">Search</button>
-  <div id="weatherdata">Weatherdata goes here.</div>
+  <br/>
+
+<p>Search city:</p>
+  <input id="citysearch"></input>
+  <button id="search" class="btn" onclick="searchWeather()">Search</button>
+  <br>
+  <br>
+  
+  <div id="weatherdata"></div>
 
   <br>
   <br>
